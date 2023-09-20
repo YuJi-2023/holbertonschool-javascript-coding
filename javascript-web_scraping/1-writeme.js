@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 const filename = process.argv[2];
-const strint_to_write = process.argv[3];
+const Strint_To_Write = process.argv[3];
 
-fs.writeFile(filename, strint_to_write, (err) => {
+fs.writeFile(filename, Strint_To_Write, (err) => {
   if (err) {
     console.log(err);
   }
