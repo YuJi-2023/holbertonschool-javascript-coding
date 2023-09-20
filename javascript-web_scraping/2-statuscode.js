@@ -10,6 +10,6 @@ request.get(url, (err, response) => {
   }
   else {
     const code = response.statusCode;
-    console.log(`Code: ${code}`);
+    console.log(`code: ${code}`);
   }
 });
