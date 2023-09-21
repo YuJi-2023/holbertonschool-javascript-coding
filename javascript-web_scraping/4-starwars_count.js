@@ -1,7 +1,5 @@
 #!/usr/bin/node
 
-const { count } = require('console');
-const { forEach } = require('lodash');
 const request = require('request');
 // request URL
 const apiUrl = 'https://swapi-api.hbtn.io/api/films/';
