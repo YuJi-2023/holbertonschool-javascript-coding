@@ -9,7 +9,7 @@ request.get(url, (err, response, body) => {
   if (err) {
     console.log(err);
   } else {
-    const data = response.body;
+    const data = body;
     fs.writeFile(filePath, data, (err) => {
       if (err) {
         console.log(err);
