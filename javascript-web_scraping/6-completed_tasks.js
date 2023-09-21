@@ -11,19 +11,23 @@ request.get(apiUrl, (err, response, body) => {
 
     // userCounts to store the counts for each user
     const userCounts = {};
-
+    let completedTasksExist = false;
     userData.forEach(user => {
       const userId = user.userId;
-      // check if todo is true
       const completeStatus = user.completed === true;
-      // initialize the count
+
       if (!userCounts[userId]) {
         userCounts[userId] = 0;
       }
       if (completeStatus === true) {
         userCounts[userId]++;
+        completedTasksExist = true;
       }
-    })
-    console.log(userCounts);
+    });
+    if (completedTasksExist) {
+      console.log(userCounts);
+    } else {
+      console.log({});
+    }
   }
 });
