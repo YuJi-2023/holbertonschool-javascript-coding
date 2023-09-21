@@ -15,5 +15,5 @@ request.get(url, (err, response, body) => {
         console.log(err);
       }
     });
-  };
+  }
 });
