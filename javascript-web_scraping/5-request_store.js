@@ -13,9 +13,6 @@ request.get(url, (err, response, body) => {
     fs.writeFile(filePath, data, (err) => {
       if (err) {
         console.log(err);
-      } else {
-        const content = fs.readFileSync(filePath, 'utf-8');
-        console.log(content);
       }
     });
   };
