@@ -3,6 +3,7 @@ const readline = require('readline');
 const line = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
+  encoding: 'utf8',
 });
 
 const welcomeMessage = 'Welcome to Holberton School, what is your name?';
