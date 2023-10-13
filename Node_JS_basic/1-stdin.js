@@ -1,13 +1,17 @@
-const welcomeMessage = 'Welcome to Holberton School, what is your name?';
-console.log(welcomeMessage);
+const readline = require('readline');
 
-const readline = require('readline').createInterface({
+const line = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-readline.question('', (name) => {
+const welcomeMessage = 'Welcome to Holberton School, what is your name?';
+
+line.question(`${welcomeMessage}\n`, (name) => {
   console.log(`Your name is: ${name}`);
-  readline.close();
+  line.close();
+});
+
+line.on('close', () => {
   console.log('This important software is now closing');
 });
