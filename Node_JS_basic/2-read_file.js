@@ -17,7 +17,7 @@ module.exports = function countStudents(path) {
     const sweStudents = [];
 
     for (const row of rows) {
-      const [firstname, lastname, age, field] = row;
+      const [firstname, , , field] = row;
       const student = `${firstname}`;
 
       if (field === 'CS') {
