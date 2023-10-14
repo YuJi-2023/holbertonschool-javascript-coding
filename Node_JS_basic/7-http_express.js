@@ -1,4 +1,4 @@
-const http = require('http');
+const express = require('express');
 const fsPromises = require('fs').promises;
 
 async function countStudents(path) {
@@ -25,37 +25,22 @@ async function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 }
-const hostname = '127.0.0.1';
-const port = 1245;
 
-const app = http.createServer(async (req, res) => {
-  const path = process.argv[2];
-  if (req.url === '/') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    const message = 'This is the list of our students\n';
-    try {
-      // call countStudents function and send results to response
-      const result = await countStudents(path);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end(message + result);
-    } catch (error) {
-      res.statusCode = 500;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end(message + error.message);
-    }
-  } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Not Found');
-  }
+const app = express();
+const port = 1245;
+const path = process.argv[2];
+
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
+});
+app.get('/students', async (req, res) => {
+  const message = 'This is the list of our students\n';
+  const result = await countStudents(path);
+  res.send(message + result);
 });
 
-app.listen(port, hostname, () => {
-  console.log(`Server is running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+  console.log(`Listening on port${port}`);
 });
 
 module.exports = app;
