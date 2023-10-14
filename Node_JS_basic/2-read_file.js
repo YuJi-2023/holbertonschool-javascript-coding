@@ -5,33 +5,27 @@ module.exports = function countStudents(path) {
     // get the file data
     const fileContent = fs.readFileSync(path, 'utf-8');
 
-    // parse the data
-    const rows = fileContent.split('\n').map((row) => row.split(','));
-    // remove the header
+    // parse the data into arrays of substrings, trim whitespaces and filter out empty lines
+    const rows = fileContent.split('\n').filter((row) => row.trim() !== '');
+    // remove the header line
     rows.shift();
+    // parse each row into subarrays base on separator comma to get each value
+    const studentsData = rows.map((row) => row.split(','));
+    const numberOfStudents = studentsData.length;
+    // initialize counter and loop through to populate the returning lists respectively
+    const csList = [];
+    const sweList = [];
 
-    // initialize and count each field
-    let field1 = 0;
-    let field2 = 0;
-    const csStudents = [];
-    const sweStudents = [];
-
-    for (const row of rows) {
-      const [firstname, , , field] = row;
-      const student = `${firstname}`;
-
-      if (field === 'CS') {
-        field1 += 1;
-        csStudents.push(student);
-      } else if (field === 'SWE') {
-        field2 += 1;
-        sweStudents.push(student);
+    for (let count = 0; count < numberOfStudents; count += 1) {
+      if (studentsData[count][3] === 'CS') {
+        csList.push(studentsData[count][0]);
+      } else if (studentsData[count][3] === 'SWE') {
+        sweList.push(studentsData[count][0]);
       }
     }
-    const numberOfStudents = rows.length;
     console.log(`Number of students: ${numberOfStudents}`);
-    console.log(`Number of students in CS: ${field1}. List: ${csStudents.join(', ')}`);
-    console.log(`Number of students in SWE: ${field2}. List: ${sweStudents.join(', ')}`);
+    console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
+    console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
   } catch (error) {
     throw new Error('Cannot load the database');
   }
